@@ -24,7 +24,7 @@ public:
     void targetKilled();
     void damageEnemy();
     void lostSightOfEnemy();
-    void setFireRate(int fireRate);
+    void setRateNDamage(int fireRate,int damage);
     bool event(QEvent *ev);
     bool eventFilter(QObject *obj, QEvent *ev);
     QPoint getPos();

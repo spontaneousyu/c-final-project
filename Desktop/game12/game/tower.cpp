@@ -12,7 +12,7 @@
 #include <QDebug>
 
 const QSize Tower::ms_fixedSize(84,84);
-Tower::Tower(QPoint pos,MainWindow *game,const QPixmap &sprite):myattacking(false),myattackRange(140),mydamage(10),myfireRate(1000),mychooseEnemy(NULL),
+Tower::Tower(QPoint pos,MainWindow *game,const QPixmap &sprite):myattacking(false),myattackRange(140),mydamage(8),myfireRate(1000),mychooseEnemy(NULL),
        mygame(game),mypos(pos),mysprite(sprite){
     myfireRateTimer=new QTimer(this);
     connect(myfireRateTimer,SIGNAL(timeout()),this,SLOT(shootWeapon()));
@@ -74,9 +74,9 @@ bool Tower::collisionWithCircle(QPoint point1,int radius1,QPoint point2,int radi
    if (distance<=(radius1+radius2))return true;
    else return false;
 }
-void Tower::setFireRate(int fireRate)//change fire rate to change type
+void Tower::setRateNDamage(int fireRate,int damage)//change fire rate to change type
 {
-    myfireRate = fireRate;
+    myfireRate = fireRate;mydamage=damage;
 }
 bool Tower::event(QEvent *ev)//tower type 2
 {
@@ -84,7 +84,7 @@ bool Tower::event(QEvent *ev)//tower type 2
     {
         if (((QMouseEvent *)ev)->button() == Qt::LeftButton)
         {
-            myfireRate = myfireRate*0.8;
+            myfireRate = myfireRate*0.5;
             mydamage = mydamage*1.2;
         }
 

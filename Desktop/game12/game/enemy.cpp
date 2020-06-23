@@ -12,7 +12,7 @@
 
 const QSize Enemy::ms_fixedSize(104, 104);
 
-Enemy::Enemy(WayPoint *startWayPoint, MainWindow *game, const QPixmap &sprite):QObject(0),myactive(false),mymaxHp(40),mycurrentHp(40),mywalkingSpeed(1.0),
+Enemy::Enemy(WayPoint *startWayPoint, MainWindow *game, const QPixmap &sprite):QObject(0),myactive(false),mymaxHp(40),mycurrentHp(160),mywalkingSpeed(1.0),
     mypos(startWayPoint->pos()),mydestinationWayPoint(startWayPoint->nextWayPoint()),mygame(game),mysprite(sprite){}
 Enemy::~Enemy(){
     myattackedTowersList.clear();

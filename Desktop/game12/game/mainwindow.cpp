@@ -12,8 +12,8 @@
 #include <QMenuBar>//https://blog.csdn.net/founderznd/article/details/51407909
 #include <QDebug>
 
-static const int TowerCost = 300;
-MainWindow::MainWindow(QWidget *parent):QMainWindow(parent),ui(new Ui::MainWindow),mywaves(0),myplayerHp(5),myplayerGold(1000),mygameEnded(false),mygameWin(false){
+static const int TowerCost = 400;
+MainWindow::MainWindow(QWidget *parent):QMainWindow(parent),ui(new Ui::MainWindow),mywaves(0),myplayerHp(3),myplayerGold(1000),mygameEnded(false),mygameWin(false){
     ui->setupUi(this);
     QAction *gameStartAction=new QAction(tr("start"),this);
     gameStartAction->setStatusTip(tr("start"));
@@ -122,7 +122,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){//version1, upgrade later
                 {
                     mytowersList.removeOne(tower);
                     delete tower;
-
+                    myplayerGold=myplayerGold+TowerCost/2;//money system advanced
                     auto it=mytowerPositionsList.begin();
                     while (it!=mytowerPositionsList.end()){
                         if (it->containPoint(pressPos) && it->hasTower())
@@ -239,5 +239,6 @@ void MainWindow::gameStart(){//pull out initialization and start letting out ene
     loadWave();
 }
 void MainWindow::gameUpgrade(){//pull out initialization and start letting out enemy
-    foreach (Tower *tower,mytowersList)tower->setFireRate(500);
+    foreach (Tower *tower,mytowersList)tower->setRateNDamage(500,16);
+    myplayerGold=myplayerGold-400;
 }
